@@ -34,9 +34,28 @@ create table movie_sessions
     start_time time  not null,
     price      float not null default 0
 );
-insert into movie_sessions (movie_id, start_time, price) VALUES
-(1, '12:00:00', 100),
-(2, '13:00:00', 120),
-(3, '14:00:00', 130),
-(4, '16:00:00', 200),
-(5, '18:00:00', 500);
+insert into movie_sessions (movie_id, start_time, price)
+VALUES (1, '12:00:00', 100),
+       (2, '13:00:00', 120),
+       (3, '14:00:00', 130),
+       (4, '16:00:00', 200),
+       (5, '18:00:00', 500),
+       (1, '21:00:00', 450);
+
+drop table if exists tickets;
+create table tickets
+(
+    id         bigint auto_increment primary key,
+    session_id int not null references movie_sessions (id),
+    seat       int not null
+);
+insert into tickets (session_id, seat)
+VALUES (1, 1),
+       (1, 2),
+       (2, 1),
+       (2, 2),
+       (2, 3),
+       (4, 5),
+       (6, 4),
+       (6, 5),
+       (6, 7);
